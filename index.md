@@ -98,17 +98,6 @@ This block includes the Eventbrite registration widget if
 are not using Eventbrite, or leave it in, since it will not be
 displayed if the 'eventbrite' field in the header is not set.
 {% endcomment %}
-{% if eventbrite %}
-<strong>Some adblockers block the registration window. If you do not see the
-  registration box below, please check your adblocker settings.</strong>
-<iframe
-  src="https://www.eventbrite.com/tickets-external?eid={{eventbrite}}&ref=etckt"
-  frameborder="0"
-  width="100%"
-  height="400px"
-  scrolling="auto">
-</iframe>
-{% endif %}
 
 
 <h2 id="general">General Information</h2>
@@ -146,7 +135,15 @@ workshop is only open to people from a particular institution.
 <div style="display: flex"><div>
      <strong>Who:&nbsp;</strong>
      </div>
-     <div markdown=1>{% remote_include {{lesson_meta}}/who.md %}</div></div>
+     <div>
+ 
+It is assumed that participants already write code for their research, 
+but no expertise is required. 
+Some experience in navigating file trees and editing files in a terminal session is needed. 
+Basic knowledge of Git and GitLab is required: you should know how to add and commit changes, and how to push changes
+to GitLab.
+Basic knowledge of Python programming is recommended, but not necessary.
+</div></div>
 {% endif %}
 
 {% comment %}
@@ -382,7 +379,7 @@ of code below the Schedule `<h2>` header below with
 
 {% if info.carpentry == "ds" %}
 <h2 id="syllabus">Syllabus</h2>
-{% remote_include {{lesson_meta}}/syllabus.md %}
+{% remote_include {{lesson_meta}}/syllabus-tno.md %}
 {% endif %}
 
 <h2 id="schedule">Schedule</h2>
@@ -394,7 +391,7 @@ of code below the Schedule `<h2>` header below with
 {% elsif info.carpentry == "lc" %}
 {% include lc/schedule.html %}
 {% elsif info.carpentry == "ds" %}
-{% remote_include {{lesson_meta}}/schedule.md %}
+{% remote_include {{lesson_meta}}/schedule-tno.md %}
 {% elsif info.carpentry == "pilot" %}
 The lesson taught in this workshop is being piloted and a precise schedule is yet to be established. The workshop will include regular breaks. If you would like to know the timing of these breaks in advance, please [contact the workshop organisers](#contact). For a list of lesson sections and estimated timings, [visit the lesson homepage]({{ site.lesson_site }}).
 {% comment %}
@@ -457,9 +454,9 @@ during the workshop.
 {% include lc/setup.html %}
 {% elsif info.carpentry == "ds" %}
 {% capture content %}
-{% remote_include {{lesson_meta}}/setup.md %}
+{% remote_include {{lesson_meta}}/setup-gitlab.md %}
 {% endcapture %}
-{% if content contains "/setup.md" %}
+{% if content contains "/setup-gitlab.md" %}
   {% capture setup %}
   {% remote_include https://raw.githubusercontent.com/{{content | strip}} %}
   {% endcapture %}
